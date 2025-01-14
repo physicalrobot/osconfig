@@ -1,24 +1,22 @@
 {
-  description = "A Nix-flake-based Node.js development environment and NixOS configuration";
+  description = "A NixOS Configuration for tars";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
-    flake-utils.url = "github:numtide/flake-utils";
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, pre-commit-hooks }: 
-    flake-utils.lib.eachDefaultSystem (system: let
-      overlays = [
-        (self: super: rec {
-          nodejs = super.nodejs_20;
-          pnpm = super.pnpm.override { inherit nodejs; };
-          yarn = super.yarn.override { inherit nodejs; };
-          prettier = super.nodePackages.prettier;
-        })
+  outputs = { self, nixpkgs }: {
+    nixosConfigurations.tars = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";  # Replace with your actual architecture
+      modules = [
+        ./configuration.nix
+        ./hardware-configuration.nix
       ];
-      pkgs = import nixpkgs { inherit overlays system; };
-      pkgs_chromium = import nixpkgs { inherit system; };
+    };
+
+    devShells.default = let
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
+    in pkgs.mkShell {
       packages = with pkgs; [
         node2nix
         nodejs
@@ -30,21 +28,11 @@
         typos
         alejandra
       ];
-    in {
-      nixosConfigurations.tars = nixpkgs.lib.nixosSystem {
-        system = system;
-        modules = [
-          ./configuration.nix  # Point to your NixOS configuration file
-          ./hardware-configuration.nix  # Point to your hardware configuration
-        ];
-      };
 
-      devShells.default = pkgs.mkShell {
-        inherit packages;
-        shellHook = ''
-          echo "node `${pkgs.nodejs}/bin/node --version`"
-        '';
-      };
-    });
+      shellHook = ''
+        echo "node `${pkgs.nodejs}/bin/node --version`"
+      '';
+    };
+  };
 }
 
