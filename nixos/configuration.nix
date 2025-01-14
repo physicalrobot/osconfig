@@ -64,7 +64,7 @@
    };
 
   hardware = {
-     opengl.enable = true;
+     graphics.enable = true;
      nvidia.modesetting.enable = true;
      nvidia.open = true;
   };
@@ -137,6 +137,15 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.config.qt5 = {
+  enable = true;
+  platformTheme = "qt5ct"; 
+    style = {
+      package = pkgs.utterly-nord-plasma;
+      name = "Utterly Nord Plasma";
+    };
+};
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -163,8 +172,8 @@
   starship
   hyprlock
   hyprcursor
-  qt6ct
-  qt5ct
+  libsForQt5.qtstyleplugin-kvantum
+  libsForQt5.qt5ct
   #(pkgs.nerdfonts.override {
    # fonts = [ "CaskaydiaMono" "FiraCode" "JetBrainsMono" ];
   #})
@@ -186,11 +195,11 @@ fonts.packages = with pkgs; [
   nerd-fonts.jetbrains-mono
 ];
 
-  environment.variables = {
-  QT_QPA_PLATFORM = "wayland";  # Ensure Qt apps use Wayland
-  QT_QPA_PLATFORMTHEME = "qt5ct";  # Use qt5ct for theming
- };
+  environment.sessionVariables = {
+  QT_QPA_PLATFORM = "wayland";
+  QT_QPA_PLATFORMTHEME = "qt5ct";
 
+  };
 
   services.xserver.libinput.enable = true;
 
