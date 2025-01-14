@@ -163,7 +163,8 @@
   starship
   hyprlock
   hyprcursor
-
+  qt6ct
+  qt5ct
   #(pkgs.nerdfonts.override {
    # fonts = [ "CaskaydiaMono" "FiraCode" "JetBrainsMono" ];
   #})
@@ -184,6 +185,12 @@ fonts.packages = with pkgs; [
   nerd-fonts.caskaydia-mono
   nerd-fonts.jetbrains-mono
 ];
+
+  environment.variables = {
+  QT_QPA_PLATFORM = "wayland";  # Ensure Qt apps use Wayland
+  QT_QPA_PLATFORMTHEME = "qt5ct";  # Use qt5ct for theming
+ };
+
 
   services.xserver.libinput.enable = true;
 

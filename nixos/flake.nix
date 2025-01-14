@@ -1,5 +1,5 @@
 {
-  description = "A Nix-flake-based Node.js development environment";
+  description = "A Nix-flake-based Node.js development environment and NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
@@ -7,12 +7,7 @@
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-    pre-commit-hooks,
-  }:
+  outputs = { self, nixpkgs, flake-utils, pre-commit-hooks }: 
     flake-utils.lib.eachDefaultSystem (system: let
       overlays = [
         (self: super: rec {
@@ -36,6 +31,14 @@
         alejandra
       ];
     in {
+      nixosConfigurations.tars = nixpkgs.lib.nixosSystem {
+        system = system;
+        modules = [
+          ./configuration.nix  # Point to your NixOS configuration file
+          ./hardware-configuration.nix  # Point to your hardware configuration
+        ];
+      };
+
       devShells.default = pkgs.mkShell {
         inherit packages;
         shellHook = ''
