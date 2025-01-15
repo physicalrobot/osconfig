@@ -18,8 +18,10 @@
   # Enable Textfox with its module
   textfox = {
     enable = true;
-    profile = "firefox-profile-name"; # Replace with the actual Firefox profile name
+    profile = "neo"; # Replace with the actual Firefox profile name
     config = {
+       # Enable horizontal tabs
+      displayHorizontalTabs = true;
       # Optional configurations can be added here
     };
   };
@@ -28,7 +30,7 @@
   # environment.
   home.packages = [
 
-  git
+  
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello

@@ -24,7 +24,7 @@ in {
         # Enable home-manager integration
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-
+        
         # Define user home-manager configuration
         home-manager.users.viku = {
           imports = [
