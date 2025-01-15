@@ -89,6 +89,9 @@
     user = "viku";
   };
 
+  services.flatpak.enable = true;
+
+
   programs.steam = {
   enable = true;
   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -133,7 +136,8 @@
     qbittorrent
     brave
     librewolf
-
+    firefox
+    flatpak
     steam
 
   ];
@@ -141,7 +145,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
     "steam"
     "steam-original"
     "steam-unwrapped"
