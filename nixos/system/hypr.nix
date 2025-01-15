@@ -31,8 +31,7 @@
     kdePackages.konsole
     kdePackages.kio-admin
     kdePackages.breeze-icons
-    kdePackages.kwrite
-
+    kwrited
     # Icon themes
     dracula-icon-theme
     nordzy-icon-theme

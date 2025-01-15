@@ -89,6 +89,13 @@
     user = "viku";
   };
 
+  programs.steam = {
+  enable = true;
+  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+};
+
   # System packages
   environment.systemPackages = with pkgs; [
     dolphin
@@ -116,10 +123,30 @@
     ninja
     pipewire
     pavucontrol
+    vlc
+    vscode
+    github-desktop
+    keepassxc
+    spotify
+    obsidian
+    tokyonight-gtk-theme
+    qbittorrent
+    brave
+    librewolf
+
+    steam
+
   ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-unwrapped"
+    "steam-run"
+  ];
 
   # Miscellaneous settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
