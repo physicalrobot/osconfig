@@ -137,14 +137,25 @@
     brave
     librewolf
     firefox
+    libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qt5ct
     flatpak
     steam
+    lazygit
+    cmatrix
+    discord
 
   ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
+  nixpkgs.config.qt5 = {
+  enable = true;
+  platformTheme = "qt5ct"; 
+    style = {
+      package = pkgs.utterly-nord-plasma;
+      name = "Utterly Nord Plasma";
+    };
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
     "steam"
     "steam-original"

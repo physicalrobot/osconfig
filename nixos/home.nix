@@ -54,7 +54,14 @@
   home.file = {
 
       ".config/kitty".source = ./dots/kitty;
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+      ".config/hypr".source = ./dots/hypr;
+      ".config/backgrounds".source = ./dots/backgrounds;
+      ".config/starship.toml".source = ./dots/starship.toml;
+      ".config/nvim".source = ./dots/nvim; 
+      ".config/waybar".source = ./dots/waybar;
+
+
+   # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
