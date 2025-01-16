@@ -16,7 +16,7 @@
   # Environment variables for Wayland support
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1"; # Hint for Electron apps to use Wayland
-    QT_QPA_PLATFORMTHEME = "qt5ct"; # Ensure QT apps respect qt5ct
+
   };
 
   # Install required packages
@@ -49,7 +49,7 @@
     #magnetic-catppuccin-gtk
     #tokyonight-gtk-theme
     catppuccin-kvantum
-    nwg-look               # Setup GTK themes
+                # Setup GTK themes
     #libsForQt5.qt5ct
     #libsForQt5.qtstyleplugin-kvantum
     #kdePackages.qt6ct

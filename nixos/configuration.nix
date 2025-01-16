@@ -77,10 +77,7 @@
   users.users.viku = {
     isNormalUser = true;
     description = "viku";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    ];
+    extraGroups = [ "networkmanager" "wheel" ]; 
   };
 
   # Enable automatic login for the user
@@ -140,7 +137,6 @@
     keepassxc
     spotify
     obsidian
-    tokyonight-gtk-theme
     qbittorrent
     brave
     librewolf
@@ -151,23 +147,61 @@
     lazygit
     cmatrix
     discord
-    tokyonight-gtk-theme
+    tokyo-night-gtk
+
 ];
 
   environment.sessionVariables = {
   QT_QPA_PLATFORM = "wayland";
   QT_QPA_PLATFORMTHEME = "qt5ct";
-  GTK_THEME = "Tokyonight-Dark-B";
   };
 
 
-   gtk = {
-      enable = true;
-      theme = {
-        name = "Adwaita-dark";
-        package = pkgs.gnome.gnome-themes-extra;
+
+
+
+  # GTK Theme Configuration
+  gtk = {
+    enable = true;
+
+    # Icon Theme Configuration
+    iconTheme = {
+      package = pkgs.catppuccin-papirus-folders.override {
+        flavor = "macchiato";
+        accent = "lavender";
+      };
+      name = "Papirus-Dark";
+    };
+
+    # GTK Theme Configuration
+    theme = {
+      name = "catppuccin-macchiato-mauve-compact";
+      package = pkgs.catppuccin-gtk.override {
+        accents = ["mauve"];
+        variant = "macchiato";
+        size = "compact";
       };
     };
+
+    # Additional GTK3 Configuration
+    gtk3.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+
+    # Additional GTK4 Configuration
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+  };
+
+
+
+
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -175,10 +209,11 @@
   nixpkgs.config.qt5 = {
   enable = true;
   platformTheme = "qt5ct"; 
-    style = {
-      name = "kvantum";
-    };
-  };  
+     style = {
+      package = pkgs.utterly-nord-plasma;
+      name = "Utterly Nord Plasma";
+    }; 
+    };  
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
     "steam"
