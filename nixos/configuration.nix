@@ -90,14 +90,22 @@
   };
 
   services.flatpak.enable = true;
+ 
+  
+  hardware = {
+     graphics.enable = true;
+     nvidia.modesetting.enable = true;
+     nvidia.open = true;
+  };
 
+  programs.firefox.enable = true;
 
   programs.steam = {
-  enable = true;
-  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-};
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
   # System packages
   environment.systemPackages = with pkgs; [
@@ -136,7 +144,6 @@
     qbittorrent
     brave
     librewolf
-    firefox
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
     flatpak
@@ -144,18 +151,35 @@
     lazygit
     cmatrix
     discord
+    tokyonight-gtk-theme
+];
 
-  ];
+  environment.sessionVariables = {
+  QT_QPA_PLATFORM = "wayland";
+  QT_QPA_PLATFORMTHEME = "qt5ct";
+  GTK_THEME = "Tokyonight-Dark-B";
+  };
+
+
+   gtk = {
+      enable = true;
+      theme = {
+        name = "Adwaita-dark";
+        package = pkgs.gnome.gnome-themes-extra;
+      };
+    };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
   nixpkgs.config.qt5 = {
   enable = true;
   platformTheme = "qt5ct"; 
     style = {
-      package = pkgs.utterly-nord-plasma;
-      name = "Utterly Nord Plasma";
+      name = "kvantum";
     };
+  };  
+
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
     "steam"
     "steam-original"
@@ -167,4 +191,3 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "24.11";
 }
-
