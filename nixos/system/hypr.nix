@@ -47,10 +47,12 @@
 
     # GTK and QT Themes
     #magnetic-catppuccin-gtk
-    #tokyonight-gtk-theme
+    tokyonight-gtk-theme
     catppuccin-kvantum
-                # Setup GTK themes
-    #libsForQt5.qt5ct
+   
+   # Setup GTK themes
+   
+   #libsForQt5.qt5ct
     #libsForQt5.qtstyleplugin-kvantum
     #kdePackages.qt6ct
     #qt5.qtwayland

@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{inputs, config, pkgs, ... }:
 
 {
   imports = [
@@ -147,7 +147,10 @@
     lazygit
     cmatrix
     discord
-    tokyo-night-gtk
+    graphite-gtk-theme
+    nwg-look
+    shadowfox
+
 
 ];
 
@@ -155,52 +158,6 @@
   QT_QPA_PLATFORM = "wayland";
   QT_QPA_PLATFORMTHEME = "qt5ct";
   };
-
-
-
-
-
-  # GTK Theme Configuration
-  gtk = {
-    enable = true;
-
-    # Icon Theme Configuration
-    iconTheme = {
-      package = pkgs.catppuccin-papirus-folders.override {
-        flavor = "macchiato";
-        accent = "lavender";
-      };
-      name = "Papirus-Dark";
-    };
-
-    # GTK Theme Configuration
-    theme = {
-      name = "catppuccin-macchiato-mauve-compact";
-      package = pkgs.catppuccin-gtk.override {
-        accents = ["mauve"];
-        variant = "macchiato";
-        size = "compact";
-      };
-    };
-
-    # Additional GTK3 Configuration
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-
-    # Additional GTK4 Configuration
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-  };
-
-
-
-
 
 
   # Allow unfree packages

@@ -15,6 +15,7 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
+
   # Enable Textfox with its module
   textfox = {
     enable = true;
