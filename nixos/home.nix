@@ -17,7 +17,7 @@
 
 
   # Enable Textfox with its module
-  textfox = {
+  options.textfox = {
     enable = true;
     profile = "neo"; # Replace with the actual Firefox profile name
     config = {
@@ -34,7 +34,7 @@
   
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    # pkgs.hello
+    # pkgs.hellolib, 
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -73,7 +73,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
-
+
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
