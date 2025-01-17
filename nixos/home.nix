@@ -16,6 +16,11 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
 
+  programs.doom-emacs = {
+  enable = true;
+  doomPrivateDir = ./doom.d; # Path to your Doom Emacs configuration
+};
+
   # Enable Textfox with its module
   options.textfox = {
     enable = true;
@@ -60,6 +65,7 @@
       ".config/starship.toml".source = ./dots/starship.toml;
       ".config/nvim".source = ./dots/nvim; 
       ".config/waybar".source = ./dots/waybar;
+      ".bashrc" = ./dots/bashrc;
 
 
    # # Building this configuration will create a copy of 'dotfiles/screenrc' in

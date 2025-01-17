@@ -51,6 +51,10 @@
           pkgs.nodePackages.prettier
           git
           typos
+          
+          ruby
+          gcc
+          
         ];
       };
     };
