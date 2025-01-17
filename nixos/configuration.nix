@@ -149,7 +149,7 @@
     discord
     graphite-gtk-theme
     nwg-look
-    shadowfox
+    btop
 
 
 ];
