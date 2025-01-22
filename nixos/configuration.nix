@@ -150,7 +150,9 @@
     graphite-gtk-theme
     nwg-look
     btop
-
+    ripgrep 
+    lua-language-server 
+    ghostty 
 
 ];
 

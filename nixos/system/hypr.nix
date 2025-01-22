@@ -24,6 +24,7 @@
     # Terminals
     kitty
     foot
+    ghostty
 
     # Icon themes
     dracula-icon-theme

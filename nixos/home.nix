@@ -15,11 +15,31 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
+  # Ghostty configuration
+  ghostty = {
+    enable = true;
+    package = inputs.ghostty.packages.${system}.default;
+    shellIntegration.enable = true;
+
+    settings = {
+      background-blur-radius = 20;
+      theme = "dark:catppuccin-mocha,light:catppuccin-latte";
+      window-theme = "dark";
+      #window-theme = "system"; # TODO make vim and terminal somehow respect this?
+      background-opacity = 0.8;
+      minimum-contrast = 1.1;
+    };
+
+    keybindings = {
+      # keybind = global:ctrl+`=toggle_quick_terminal
+      "global:ctrl+`" = "toggle_quick_terminal";
+    };
+  };
 
   programs.doom-emacs = {
-  enable = true;
-  doomPrivateDir = ./doom.d; # Path to your Doom Emacs configuration
-};
+    enable = true;
+    doomPrivateDir = ./doom.d; # Path to your Doom Emacs configuration
+  };
 
   # Enable Textfox with its module
   options.textfox = {
@@ -66,7 +86,8 @@
       ".config/nvim".source = ./dots/nvim; 
       ".config/waybar".source = ./dots/waybar;
       ".bashrc" = ./dots/bashrc;
-
+      ".config/ghostty".source = ./dots/ghostty;
+      
 
    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
@@ -79,7 +100,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
-
+
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
@@ -98,7 +119,6 @@
   #
   home.sessionVariables = {
      EDITOR = "nvim";
-
 
   };
 
