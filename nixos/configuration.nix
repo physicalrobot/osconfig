@@ -62,6 +62,8 @@
     enable = true;
     powerOnBoot = true;
   };
+  services.blueman.enable = true;
+
 
   # Sound with PipeWire
   hardware.pulseaudio.enable = false;
