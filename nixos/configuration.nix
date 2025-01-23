@@ -144,8 +144,7 @@
     librewolf
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
-    flatpak
-    steam
+    flatpak 
     lazygit
     cmatrix
     discord
@@ -154,7 +153,15 @@
     btop
     ripgrep 
     lua-language-server 
-    ghostty 
+    ghostty
+    gnome-keyring
+    SDL2_ttf
+    SDL2_net
+    SDL2_gfx
+    SDL2_sound
+    SDL2_mixer
+    SDL2_image
+    rclone
 
 ];
 
