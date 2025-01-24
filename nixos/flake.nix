@@ -4,6 +4,7 @@
     nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixvim.url = "github:nix-community/nixvim";
+    catppuccin.url = "github:catppuccin/nix";
  };
 
 
@@ -13,6 +14,7 @@
     home-manager,
     nix-doom-emacs,
     nixvim,
+    catppuccin,
     ...
   }: {
   
@@ -20,9 +22,11 @@
   tars = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      ./configuration.nix
-      ./modules/nixvim
-
+      ./configuration.nix 
+      ./modules/nixvim/nixvim.nix
+      nixvim.nixosModules.nixvim
+      catppuccin.nixosModules.catppuccin
+      
       # Integrate Home Manager for the system
       home-manager.nixosModules.home-manager
     ];

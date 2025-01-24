@@ -40,7 +40,7 @@
     enable = true;
 
     colorschemes = {
-      catppuccin = {
+      catppuccin-mocha = {
         enable = true;
       };
     };

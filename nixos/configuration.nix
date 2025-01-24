@@ -4,8 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./system/hypr.nix  # Hyprland settings in a separate file for modularity
-    ./nixos/modules/nixvim
-
+    ./modules/all.nix
       # Add more modular configurations
 
   ];
@@ -109,26 +108,7 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
-  programs.nixvim = {
-    enable = true;
-
-    # Colorscheme configuration
-    colorschemes = {
-      catppuccin = {
-        enable = true;
-      };
-    };
-
-    # Plugin configuration
-    plugins = {
-      lualine = {
-        enable = true;
-      };
-
-    };
-  };
-  
-
+ 
 
 
 
