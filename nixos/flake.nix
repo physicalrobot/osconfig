@@ -2,13 +2,17 @@
   inputs = {
     home-manager.url = "github:rycee/home-manager";
     nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
-  };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixvim.url = "github:nix-community/nixvim";
+ };
+
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
     nix-doom-emacs,
+    nixvim,
     ...
   }: {
     nixosConfigurations = {
@@ -16,7 +20,8 @@
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
-
+          ./modules/home/nixvim.nix
+          nixvim.homeManagerModules.nixvim
           # Integrate Home Manager for the system
           home-manager.nixosModules.home-manager
         ];

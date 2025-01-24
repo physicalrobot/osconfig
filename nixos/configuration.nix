@@ -106,6 +106,30 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  programs.nixvim = {
+    enable = true;
+
+    # Colorscheme configuration
+    colorschemes = {
+      catppuccin = {
+        enable = true;
+      };
+    };
+
+    # Plugin configuration
+    plugins = {
+      lualine = {
+        enable = true;
+      };
+    };
+  };
+  
+
+
+
+
+
+
   # System packages
   environment.systemPackages = with pkgs; [
     dolphin
@@ -124,7 +148,7 @@
     wofi
     starship
     hyprpaper
-    neovim
+    #neovim
     emacs
     gcc
     clang
