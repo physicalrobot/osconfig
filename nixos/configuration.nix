@@ -4,7 +4,10 @@
   imports = [
     ./hardware-configuration.nix
     ./system/hypr.nix  # Hyprland settings in a separate file for modularity
-    # Add more modular configurations as needed
+    ./nixos/modules/nixvim
+
+      # Add more modular configurations
+
   ];
 
   # Bootloader configuration
@@ -121,6 +124,7 @@
       lualine = {
         enable = true;
       };
+
     };
   };
   

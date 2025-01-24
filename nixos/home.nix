@@ -36,6 +36,22 @@
     };
   };
 
+   programs.nixvim = {
+    enable = true;
+
+    colorschemes = {
+      catppuccin = {
+        enable = true;
+      };
+    };
+
+    plugins = {
+      lualine = {
+        enable = true;
+      };
+    };
+  };
+
   programs.doom-emacs = {
     enable = true;
     doomPrivateDir = ./doom.d; # Path to your Doom Emacs configuration

@@ -15,20 +15,23 @@
     nixvim,
     ...
   }: {
+  
     nixosConfigurations = {
-      tars = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
-          ./modules/home/nixvim.nix
-          nixvim.homeManagerModules.nixvim
-          # Integrate Home Manager for the system
-          home-manager.nixosModules.home-manager
-        ];
-      };
-    };
+  tars = nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+    modules = [
+      ./configuration.nix
+      ./modules/nixvim
 
-    homeConfigurations = {
+      # Integrate Home Manager for the system
+      home-manager.nixosModules.home-manager
+    ];
+  };
+};
+
+    
+
+      homeConfigurations = {
       viku = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         modules = [
