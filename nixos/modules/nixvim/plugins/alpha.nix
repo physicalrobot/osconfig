@@ -105,7 +105,7 @@
             opts = {
               hl = "AlphaButton";
               shortcut = "e";
-              keymap = [ "n" "e" ":e ~/nix/nixos/modules/nixvim/nixvim.nix <CR>" {} ];
+              keymap = [ "n" "e" ":e ~/.dotfiles/nixos/modules/nixvim/nixvim.nix <CR>" {} ];
               position = "center";
               cursor = 0;
               width = 40;
