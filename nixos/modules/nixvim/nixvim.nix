@@ -12,6 +12,7 @@
     defaultEditor = true;
     colorschemes.catppuccin.enable = true;
     plugins.lualine.enable = true;
+    plugins.alpha.enable = true;
     #colorschemes.nightfox.enable = true;
      
     # colorschemes.dracula-nvim.enable = true;

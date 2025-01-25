@@ -5,7 +5,7 @@
     keymaps = {
       "<C-o>" = "find_files";
       "<C-f>" = "live_grep";
-      # "<leader>b" = "buffers";
+      "<leader>b" = "buffers";
       # "<leader>fh" = "help_tags";
       # "<leader>gf" = "git_files";
       # "<leader>of" = "oldfiles";
