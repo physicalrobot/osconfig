@@ -8,7 +8,7 @@
 
     opts = {
       updatetime = 100; # Faster completion
-      shell = "/home/viku/.nix-profile/bin/bashrc";
+      shell = "/run/current-system/sw/bin/bash";
 
       relativenumber = true; # Relative line numbers
       number = true; # Display the absolute line number of the current line

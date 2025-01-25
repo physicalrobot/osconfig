@@ -39,11 +39,8 @@
    programs.nixvim = {
     enable = true;
 
-    colorschemes = {
-      catppuccin-mocha = {
-        enable = true;
-      };
-    };
+    
+  
 
     plugins = {
       lualine = {

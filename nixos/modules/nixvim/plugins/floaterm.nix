@@ -4,7 +4,7 @@
 
     width = 0.8;
     height = 0.8;
-    shell = "/home/bluecosmo/.nix-profile/bin/bash";
+    shell = "/run/current-system/sw/bin/bash";
 
     title = "";
 

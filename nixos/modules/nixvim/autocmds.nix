@@ -44,7 +44,7 @@
           highlight HarpoonWindow guibg=#0f1c21 guifg=#ffffff
           highlight HarpoonBorder guibg=#0f1c21 guifg=#ffffff
           highlight HarpoonMenu guibg=#0f1c21 guifg=#ffffff
-          highlight Normal guibg=#0f1c21 guifg=#ffffff
+          highlight Normal guibg=NONE guifg=#ffffff
           highlight NormalFloat guibg=#0f1c21 guifg=#ffffff
           highlight FloatBorder guibg=#0f1c21 guifg=#ffffff
           highlight TelescopeNormal guibg=#0f1c21

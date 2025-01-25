@@ -10,8 +10,9 @@
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
-    #colorschemes.catppuccin.enable = true;
+    colorschemes.catppuccin.enable = true;
     plugins.lualine.enable = true;
+    #colorschemes.nightfox.enable = true;
      
     # colorschemes.dracula-nvim.enable = true;
     # colorschemes.nightfox.flavor = "duskfox";
