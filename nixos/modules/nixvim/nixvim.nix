@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./opts.nix
@@ -13,11 +14,18 @@
     colorschemes.catppuccin.enable = true;
     plugins.lualine.enable = true;
     plugins.alpha.enable = true;
-    #colorschemes.nightfox.enable = true;
-     
-    # colorschemes.dracula-nvim.enable = true;
-    # colorschemes.nightfox.flavor = "duskfox";
-    # colorschemes.poimandres.enable = true;
+
+extraPlugins = with pkgs.vimPlugins; [
+      vimwiki 
+    ];
+extraConfigVim = ''
+      let g:vimwiki_list = [{
+        \ 'path': '~/wiki/',
+        \ 'syntax': 'markdown',
+        \ 'ext': '.md'
+      \ }]
+      let g:vimwiki_global_ext = 0
+    '';
   };
 }
 
