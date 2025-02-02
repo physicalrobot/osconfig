@@ -11,7 +11,9 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-  };
+
+  }; 
+
 
   # Environment variables for Wayland support
   environment.sessionVariables = {

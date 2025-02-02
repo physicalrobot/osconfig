@@ -58,6 +58,21 @@
     libinput.enable = true;
   };
 
+  #automount Gringotts
+  fileSystems."/mnt/mydrive" = {
+  device = "/dev/sda2";
+  fsType = "ntfs";
+  options = [ "rw" "uid=1000" "gid=1000" "umask=0022" ];
+};
+  
+
+
+  # Jellyfin Media Server
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # Printing and Bluetooth
   services.printing.enable = true;
   hardware.bluetooth = {
@@ -107,11 +122,6 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
-
- 
-
-
-
 
 
   # System packages
@@ -170,6 +180,11 @@
     SDL2_mixer
     SDL2_image
     rclone
+    jellyfin
+    jellyfin-web
+    ntfs3g  
+    jellyfin-mpv-shim
+    mpvpaper
 
 ];
 
