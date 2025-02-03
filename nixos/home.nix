@@ -38,12 +38,11 @@
     };
   };
 
-  programs.doom-emacs = {
-    enable = true;
-    doomPrivateDir = ./doom.d; # Path to your Doom Emacs configuration
-  };
+  # programs.doom-emacs = {
+  #  enable = true;
+  #  doomPrivateDir = ./modules/doom; # Path to your Doom Emacs configuration
+  # };
 
-  # ✅ Fix: Move `textfox` inside `programs`
   textfox = {
     enable = true;
     profile = "neo"; # Replace with the actual Firefox profile name
@@ -52,15 +51,12 @@
     };
   };
 
-  # ✅ Fix: Home packages must be inside `home.packages`
   home.packages = with pkgs; [
     git
     ripgrep
     fd
-    (nerdfonts.override { fonts = [ "FiraCode" ]; }) # Needed for icons in Doom
-  ];
+    nerd-fonts.fira-code  ];
 
-  # ✅ Fix: `home.file` should not contain unnecessary comments
   home.file = {
     ".config/kitty".source = ./dots/kitty;
     ".config/hypr".source = ./dots/hypr;
@@ -68,15 +64,13 @@
     ".config/starship.toml".source = ./dots/starship.toml;
     ".config/nvim".source = ./dots/nvim;
     ".config/waybar".source = ./dots/waybar;
-    ".bashrc" = ./dots/bashrc;
+    ".bashrc".source = ./dots/bashrc;
     ".config/ghostty".source = ./dots/ghostty;
   };
 
-  # ✅ Fix: Ensure `home.sessionVariables` is correctly defined
   home.sessionVariables = {
     EDITOR = "nvim";
   };
 
-  # ✅ Fix: Ensure Home Manager is enabled properly
   programs.home-manager.enable = true;
 }
