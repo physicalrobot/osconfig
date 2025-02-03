@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixvim.url = "github:nix-community/nixvim";
     catppuccin.url = "github:catppuccin/nix";
+    textfox.url = "github:adriankarlen/textfox";  
   };
 
   outputs = {
@@ -14,30 +15,38 @@
     nix-doom-emacs,
     nixvim,
     catppuccin,
+    textfox,
     ...
   }: {
+  
   
     nixosConfigurations = {
       tars = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix 
+          ./configuration.nix
           ./modules/nixvim/nixvim.nix
+
           nixvim.nixosModules.nixvim
           catppuccin.nixosModules.catppuccin
 
-          # Integrate Home Manager inside the system
           home-manager.nixosModules.home-manager
 
-          # User-specific configurations inside NixOS
+          # ✅ Fix: Ensure proper structure for Home Manager
           {
-            home-manager.users.viku = {
-              imports = [ ./modules/doom/doom.nix ];  # Import Doom from .dotfiles/nixos/modules/doom
+          home-manager.users.viku = {
+              imports = [
+                nix-doom-emacs.hmModule
+                nixvim.homeManagerModules.nixvim
+                textfox.homeManagerModules.default  
+                ./home.nix
+              ];
             };
           }
         ];
       };
     };
+
 
     devShell = {
       x86_64-linux = nixpkgs.legacyPackages."x86_64-linux".mkShell {
