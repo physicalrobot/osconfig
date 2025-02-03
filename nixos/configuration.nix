@@ -4,8 +4,8 @@
   imports = [
     ./hardware-configuration.nix
     ./system/hypr.nix  # Hyprland settings in a separate file for modularity
-    ./modules/all.nix
-      # Add more modular configurations
+    #./modules/all.nix
+    # Add more modular configurations
 
   ];
 
@@ -185,7 +185,9 @@
     ntfs3g  
     jellyfin-mpv-shim
     mpvpaper
-
+    pandoc
+    graphviz
+    vimwiki-markdown
 ];
 
   environment.sessionVariables = {

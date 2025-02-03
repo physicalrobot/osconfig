@@ -49,10 +49,40 @@
     };
   };
 
-  programs.doom-emacs = {
+
+
+  programs.emacs = {
     enable = true;
-    doomPrivateDir = ./doom.d; # Path to your Doom Emacs configuration
+    package = pkgs.emacs29;  # You can change to emacs28 or emacs29-nox if needed
   };
+
+  home.packages = with pkgs; [
+    git
+    ripgrep
+    fd
+    (nerdfonts.override { fonts = [ "FiraCode" ]; }) # Needed for icons in Doom
+  ];
+
+  home.file.".config/emacs" = {
+    source = pkgs.fetchFromGitHub {
+      owner = "hlissner";
+      repo = "doom-emacs";
+      rev = "master";
+      sha256 = "sha256-hash-of-latest-doom-emacs"; # Replace this with actual hash
+    };
+  };
+
+  home.file.".config/doom" = {
+    source = ./doom-config; # Create this folder for your Doom config
+  };
+
+  home.activation.installDoomEmacs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -d "$HOME/.config/doom" ]; then
+      git clone --depth 1 https://github.com/hlissner/doom-emacs.git "$HOME/.config/emacs"
+      $HOME/.config/emacs/bin/doom install
+    fi
+  '';
+
 
   # Enable Textfox with its module
   options.textfox = {

@@ -5,8 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixvim.url = "github:nix-community/nixvim";
     catppuccin.url = "github:catppuccin/nix";
- };
-
+  };
 
   outputs = {
     self,
@@ -19,34 +18,21 @@
   }: {
   
     nixosConfigurations = {
-  tars = nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
-    modules = [
-      ./configuration.nix 
-      ./modules/nixvim/nixvim.nix
-      nixvim.nixosModules.nixvim
-      catppuccin.nixosModules.catppuccin
-      
-      # Integrate Home Manager for the system
-      home-manager.nixosModules.home-manager
-    ];
-  };
-};
-
-    
-
-      homeConfigurations = {
-      viku = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      tars = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         modules = [
-          ./home.nix
+          ./configuration.nix 
+          ./modules/nixvim/nixvim.nix
+          nixvim.nixosModules.nixvim
+          catppuccin.nixosModules.catppuccin
 
-          # Add Doom Emacs for the user
+          # Integrate Home Manager inside the system
+          home-manager.nixosModules.home-manager
+
+          # User-specific configurations inside NixOS
           {
-            imports = [ nix-doom-emacs.hmModule ];
-            programs.doom-emacs = {
-              enable = true;
-              doomPrivateDir = ./doom.d;
+            home-manager.users.viku = {
+              imports = [ ./modules/doom/doom.nix ];  # Import Doom from .dotfiles/nixos/modules/doom
             };
           }
         ];
@@ -63,13 +49,10 @@
           pkgs.nodePackages.prettier
           git
           typos
-          
           ruby
           gcc
-          
         ];
       };
     };
   };
 }
-
