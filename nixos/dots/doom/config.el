@@ -51,6 +51,7 @@
 
 (add-hook 'hack-local-variables-hook (lambda () (when (boundp 'org-roam-directory) (org-roam-db-sync))))
 
+(add-to-list 'safe-local-variable-values '(org-roam-directory . "."))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
