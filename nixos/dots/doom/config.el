@@ -42,6 +42,13 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+(use-package! org-roam
+  :after org
+  :init
+  (setq org-roam-directory "~/org-roam")
+  :config
+  (org-roam-db-autosync-mode))
+
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
