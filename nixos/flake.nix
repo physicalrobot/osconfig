@@ -1,7 +1,8 @@
 {
+  description = "NixOS and Home Manager configuration";
+
   inputs = {
     home-manager.url = "github:rycee/home-manager";
-    # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     nixvim.url = "github:nix-community/nixvim";
     catppuccin.url = "github:catppuccin/nix";
     textfox.url = "github:adriankarlen/textfox";
@@ -35,17 +36,27 @@
           home-manager.nixosModules.home-manager
 
           {
-            home-manager.users.viku = {
-              imports = [
-                # nix-doom-emacs.hmModule
-                nixvim.homeManagerModules.nixvim
-                textfox.homeManagerModules.default  
-                ./home.nix
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";  # <--- This automatically renames conflicting files
+            home-manager.sharedModules = [
+              nixvim.homeManagerModules.nixvim
+              textfox.homeManagerModules.default  
               ];
-            };
+            home-manager.users.viku = import ./home.nix;
           }
         ];
       };
+    };
+
+    homeConfigurations.viku = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      extraSpecialArgs = { inherit nixpkgs; };
+      modules = [
+        nixvim.homeManagerModules.nixvim
+        textfox.homeManagerModules.default
+        ./home.nix
+      ];
     };
 
     devShell = forAllSystems (system: nixpkgs.legacyPackages.${system}.mkShell {
@@ -63,4 +74,3 @@
     });
   };
 }
-

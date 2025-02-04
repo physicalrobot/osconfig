@@ -114,6 +114,7 @@
      nvidia.open = true;
   };
 
+  
   programs.firefox.enable = true;
 
   programs.steam = {

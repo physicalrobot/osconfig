@@ -15,11 +15,9 @@ in
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage plain files is through 'home.file'.
     file = {
-      ".config/kitty".source = ./dots/kitty;
       ".config/hypr".source = ./dots/hypr;
       ".config/backgrounds".source = ./dots/backgrounds;
       ".config/starship.toml".source = ./dots/starship.toml;
-      ".config/nvim".source = ./dots/nvim;
       ".config/waybar".source = ./dots/waybar;
       ".bashrc".source = pkgs.writeText "bashrc" (builtins.readFile ./dots/bashrc);
       ".config/ghostty".source = ./dots/ghostty;
