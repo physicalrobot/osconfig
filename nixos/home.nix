@@ -13,17 +13,16 @@ in
     # The home.packages option allows you to install Nix packages into your environment.
     packages = [];
 
-
     # Home Manager is pretty good at managing dotfiles. The primary way to manage plain files is through 'home.file'.
     file = {
-      ".config/kitty".source = builtins.path { path = ./dots/kitty; name = "kitty"; };
-      ".config/hypr".source = builtins.path { path = ./dots/hypr; name = "hypr"; };
-      ".config/backgrounds".source = builtins.path { path = ./dots/backgrounds; name = "backgrounds"; };
-      ".config/starship.toml".source = builtins.path { path = ./dots/starship.toml; name = "starship"; };
-      ".config/nvim".source = builtins.path { path = ./dots/nvim; name = "nvim"; };
-      ".config/waybar".source = builtins.path { path = ./dots/waybar; name = "waybar"; };
-      ".bashrc".source = builtins.path { path = ./dots/bashrc; name = "bashrc"; };
-      ".config/ghostty".source = builtins.path { path = ./dots/ghostty; name = "ghostty"; };
+      ".config/kitty".source = ./dots/kitty;
+      ".config/hypr".source = ./dots/hypr;
+      ".config/backgrounds".source = ./dots/backgrounds;
+      ".config/starship.toml".source = ./dots/starship.toml;
+      ".config/nvim".source = ./dots/nvim;
+      ".config/waybar".source = ./dots/waybar;
+      ".bashrc".source = pkgs.writeText "bashrc" (builtins.readFile ./dots/bashrc);
+      ".config/ghostty".source = ./dots/ghostty;
     };
 
 
