@@ -49,6 +49,9 @@
   :config
   (org-roam-db-autosync-mode))
 
+(add-hook 'hack-local-variables-hook (lambda () (when (boundp 'org-roam-directory) (org-roam-db-sync))))
+
+
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
