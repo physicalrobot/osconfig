@@ -30,6 +30,7 @@
         modules = [
           ./configuration.nix
           ./modules/nixvim/nixvim.nix
+	  ./modules/nixvim/plugins/all.nix
 
           nixvim.nixosModules.nixvim
           catppuccin.nixosModules.catppuccin

@@ -35,6 +35,7 @@ in
     package = pkgs.ghostty; # Ensure Ghostty is available in your package set
     settings = {
       background-blur-radius = 20;
+      enable-clipboard = false;
       theme = "dark:catppuccin-mocha,light:catppuccin-latte";
       window-theme = "dark";
       background-opacity = 0.8;
@@ -42,6 +43,10 @@ in
       keybind = "global:ctrl+grave_accent=toggle_quick_terminal";
     };
   };
+
+  imports = [
+    ./modules/nixvim/nixvim.nix
+  ];
 
   programs.nixvim = {
     enable = true;
