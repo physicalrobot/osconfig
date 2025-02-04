@@ -21,7 +21,7 @@ in
       ".config/waybar".source = ./dots/waybar;
       ".bashrc".source = pkgs.writeText "bashrc" (builtins.readFile ./dots/bashrc);
       ".config/ghostty".source = ./dots/ghostty;
-      ".config/doom/".source = ./dots/doom; 
+      ".config/doom".source = ./dots/doom; 
     };
 
 
