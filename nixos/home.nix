@@ -1,18 +1,41 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
+let
+  homeDirectory = "/home/viku";
+in
 {
   # Home Manager needs a bit of information about you and the paths it should manage.
-  home.username = "viku";
-  home.homeDirectory = "/home/viku";
+  home = {
+    username = "viku";
+    homeDirectory = homeDirectory;
+    stateVersion = "24.11"; # Please read the comment before changing.
 
-  # This value determines the Home Manager release that your configuration is compatible with.
-  home.stateVersion = "24.11"; # Please read the comment before changing.
+    # The home.packages option allows you to install Nix packages into your environment.
+    packages = [];
+
+
+    # Home Manager is pretty good at managing dotfiles. The primary way to manage plain files is through 'home.file'.
+    file = {
+      ".config/kitty".source = builtins.path { path = ./dots/kitty; name = "kitty"; };
+      ".config/hypr".source = builtins.path { path = ./dots/hypr; name = "hypr"; };
+      ".config/backgrounds".source = builtins.path { path = ./dots/backgrounds; name = "backgrounds"; };
+      ".config/starship.toml".source = builtins.path { path = ./dots/starship.toml; name = "starship"; };
+      ".config/nvim".source = builtins.path { path = ./dots/nvim; name = "nvim"; };
+      ".config/waybar".source = builtins.path { path = ./dots/waybar; name = "waybar"; };
+      ".bashrc".source = builtins.path { path = ./dots/bashrc; name = "bashrc"; };
+      ".config/ghostty".source = builtins.path { path = ./dots/ghostty; name = "ghostty"; };
+    };
+
+
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
+  };
 
   # Ghostty configuration
   programs.ghostty = {
     enable = true;
     package = pkgs.ghostty; # Ensure Ghostty is available in your package set
-
     settings = {
       background-blur-radius = 20;
       theme = "dark:catppuccin-mocha,light:catppuccin-latte";
@@ -21,56 +44,20 @@
       minimum-contrast = 1.1;
       keybind = "global:ctrl+grave_accent=toggle_quick_terminal";
     };
-
   };
 
-   programs.nixvim = {
+  programs.nixvim = {
     enable = true;
-    colorschemes = {
-      catppuccin = {
-        enable = true;
-      };
-    };
-    plugins = {
-      lualine = {
-        enable = true;
-      };
-    };
+    plugins.lualine.enable = true;
   };
 
-  # programs.doom-emacs = {
-  #  enable = true;
-  #  doomPrivateDir = ./modules/doom; # Path to your Doom Emacs configuration
-  # };
-
+  # Enable Textfox with its module
   textfox = {
     enable = true;
     profile = "neo"; # Replace with the actual Firefox profile name
-    config = {
-      displayHorizontalTabs = true; # Enable horizontal tabs
-    };
+    config.displayHorizontalTabs = true;
   };
 
-  home.packages = with pkgs; [
-    git
-    ripgrep
-    fd
-    nerd-fonts.fira-code  ];
-
-  home.file = {
-    ".config/kitty".source = ./dots/kitty;
-    ".config/hypr".source = ./dots/hypr;
-    ".config/backgrounds".source = ./dots/backgrounds;
-    ".config/starship.toml".source = ./dots/starship.toml;
-    ".config/nvim".source = ./dots/nvim;
-    ".config/waybar".source = ./dots/waybar;
-    ".bashrc".source = ./dots/bashrc;
-    ".config/ghostty".source = ./dots/ghostty;
-  };
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
+  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
