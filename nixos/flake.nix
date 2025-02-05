@@ -90,6 +90,11 @@
         (pkgs.sassc.override { libsass = pkgs.libsass; })
         libev     
         zlib
+        python312Packages.pip
+        python312Packages.virtualenv
+        python312Packages.cython
+        python312Packages.psycopg2  # ✅ Prebuilt version
+        python312Packages.python-ldap 
       ];
     });
   };
