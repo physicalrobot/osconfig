@@ -88,7 +88,8 @@
         wget
         wkhtmltopdf
         (pkgs.sassc.override { libsass = pkgs.libsass; })
-       
+        libev     
+        zlib
       ];
     });
   };
