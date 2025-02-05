@@ -53,8 +53,10 @@
 
 (add-to-list 'safe-local-variable-values '(org-roam-directory . "."))
 
-(set-frame-parameter (selected-frame) 'alpha '(85 . 85))
-(add-to-list 'default-frame-alist '(alpha . (85 . 85)))
+
+(set-frame-parameter nil 'alpha-background 75) ; For current frame
+(add-to-list 'default-frame-alist '(alpha-background . 75)) ; For all new frames henceforth
+
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.

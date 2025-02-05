@@ -5,6 +5,8 @@
 (setq display-line-numbers-type 'relative)
 (setq org-directory "~/org/")
 
-(set-frame-parameter (selected-frame) 'alpha '(85 . 85))
-(add-to-list 'default-frame-alist '(alpha . (85 . 85)))
+
+(set-frame-parameter nil 'alpha-background 75) ; For current frame
+(add-to-list 'default-frame-alist '(alpha-background . 75)) ; For all new frames henceforth
+
 
