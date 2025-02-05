@@ -56,7 +56,7 @@ keybind = cmd+s>z=toggle_split_zoom
 keybind = cmd+s>e=equalize_splits
 
 # other
-copy-on-select = clipboard
+copy-on-select = false
 
 
 # Ef-Winter Colors
