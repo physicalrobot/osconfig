@@ -88,6 +88,7 @@
         wget
         wkhtmltopdf
         sassc
+        libsass
       ];
     });
   };
