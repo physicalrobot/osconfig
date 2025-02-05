@@ -87,8 +87,8 @@
         libjpeg
         wget
         wkhtmltopdf
-        sassc
-        libsass
+        (pkgs.sassc.override { libsass = pkgs.libsass; })
+       
       ];
     });
   };
