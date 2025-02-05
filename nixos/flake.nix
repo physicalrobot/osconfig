@@ -8,6 +8,7 @@
     textfox.url = "github:adriankarlen/textfox";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nur.url = "github:nix-community/NUR";
   };
 
   outputs = { self, nixpkgs, home-manager, nixvim, catppuccin, textfox, ... }: 
@@ -71,6 +72,22 @@
         typos
         ruby
         gcc
+        python3
+        python3Packages.pip
+        python3Packages.virtualenv
+        python3Packages.wheel
+        python3Packages.setuptools 
+        postgresql
+        postgresql_13
+        libxslt
+        libzip
+        openldap
+        cyrus_sasl
+        libxml2
+        libjpeg
+        wget
+        wkhtmltopdf
+        sassc
       ];
     });
   };
