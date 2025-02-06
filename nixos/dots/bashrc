@@ -1,10 +1,9 @@
 eval "$(starship init bash)"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_QPA_PLATFORM=wayland
-export PATH="$HOME/.config/emacs/bin:$PATH"
- 
+export PATH="$HOME/.config/emacs/bin:$PATH" 
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
-
+export DOOMDIR="$HOME/.dotfiles/nixos/dots/doom"
 export GEM_HOME="$HOME/.gem"
 export GEM_PATH="$HOME/.gem"
 export PATH="$HOME/.gem/bin:$PATH"
