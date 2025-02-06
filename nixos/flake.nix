@@ -77,7 +77,7 @@
 
           {
             # Hardware-specific settings for MNT Pocket Reform
-            boot.kernelPackages = pkgs.linuxPackages_latest;
+            boot.kernelPackages = nixpkgs.legacyPackages.aarch64-linux.linuxPackages_latest;
             hardware.opengl.enable = true;
             powerManagement.enable = true;
           }
