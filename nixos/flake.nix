@@ -102,7 +102,7 @@
     };
 
   devShells = forAllSystems (system: {
-      devShell = (pkgsFor system).mkShell {
+        default = (pkgsFor system).mkShell {
         packages = devPackagesFor system;
       };
     }); 
