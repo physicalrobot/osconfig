@@ -55,15 +55,18 @@
 
 
 (defun qleguennec/set-frame-transparency (&optional frame)
+  "Set the transparency of the selected FRAME to 80."
   (interactive)
   (let ((frame (or frame (selected-frame))))
     (set-frame-parameter frame 'alpha-background 80)))
 
-(dolist (frame (visible-frame-list))
+;; Apply to all existing frames
+(dolist (frame (frame-list))
   (qleguennec/set-frame-transparency frame))
 
-(add-to-list 'after-make-frame-functions
-             #'qleguennec/set-frame-transparency)
+;; Ensure it's applied to newly created frames
+(add-hook 'after-make-frame-functions #'qleguennec/set-frame-transparency)
+
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
