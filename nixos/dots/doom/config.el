@@ -54,15 +54,8 @@
 (add-to-list 'safe-local-variable-values '(org-roam-directory . "."))
 
 
-(defun qleguennec/set-frame-transparency (&optional frame)
-  "Set the transparency of the selected FRAME to 80."
-  (interactive)
-  (let ((frame (or frame (selected-frame))))
-    (set-frame-parameter frame 'alpha-background 80)))
-
-;; Apply to all existing frames
-(dolist (frame (frame-list))
-  (qleguennec/set-frame-transparency frame))
+(set-frame-parameter (selected-frame) 'alpha-background 85)
+(add-to-list 'default-frame-alist '(alpha-background . 85))
 
 ;; Ensure it's applied to newly created frames
 (add-hook 'after-make-frame-functions #'qleguennec/set-frame-transparency)
