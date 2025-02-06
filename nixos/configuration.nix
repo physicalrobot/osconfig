@@ -4,7 +4,6 @@
   imports = [
     ./hardware-configuration.nix
     ./system/hypr.nix  # Hyprland settings in a separate file for modularity
-    #./modules/all.nix
     # Add more modular configurations
 
   ];
@@ -65,8 +64,6 @@
   options = [ "rw" "uid=1000" "gid=1000" "umask=0022" ];
 };
   
-
-
   # Jellyfin Media Server
   services.jellyfin = {
     enable = true;
@@ -126,77 +123,7 @@
 
 
   # System packages
-  environment.systemPackages = with pkgs; [
-    dolphin
-    hyprland
-    waybar
-    wl-clipboard
-    wlogout
-    swaylock
-    mako
-    alacritty
-    libinput
-    kitty
-    git
-    nix
-    udisks2
-    wofi
-    starship
-    hyprpaper
-    #neovim
-    #emacs
-    gcc
-    clang
-    cmake
-    unzip
-    ninja
-    pipewire
-    pavucontrol
-    vlc
-    vscode
-    github-desktop
-    keepassxc
-    spotify
-    obsidian
-    qbittorrent
-    brave
-    librewolf
-    libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.qt5ct
-    flatpak 
-    lazygit
-    cmatrix
-    discord
-    graphite-gtk-theme
-    nwg-look
-    btop
-    ripgrep 
-    lua-language-server 
-    ghostty
-    gnome-keyring
-    SDL2_ttf
-    SDL2_net
-    SDL2_gfx
-    SDL2_sound
-    SDL2_mixer
-    SDL2_image
-    rclone
-    jellyfin
-    jellyfin-web
-    ntfs3g  
-    jellyfin-mpv-shim
-    mpvpaper
-    pandoc
-    graphviz
-    vimwiki-markdown
-    emacs30-pgtk
-];
-
-  environment.sessionVariables = {
-  QT_QPA_PLATFORM = "wayland";
-  QT_QPA_PLATFORMTHEME = "qt5ct";
-  };
-
+  environment.systemPackages = import ./system-packages.nix { pkgs = pkgs; };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

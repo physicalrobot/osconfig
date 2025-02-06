@@ -16,7 +16,10 @@
     inherit (nixpkgs) lib;
     
     # Generate attributes for multiple systems
-    forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+      forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+
+    # Import dev packages from an external file
+      devPackages = import ./dev-packages.nix;
 
     # Function to import packages with overlays applied
     importPkgs = path: attrs: import path (attrs // {
@@ -31,7 +34,7 @@
         modules = [
           ./configuration.nix
           ./modules/nixvim/nixvim.nix
-	  ./modules/nixvim/plugins/all.nix
+          ./modules/nixvim/plugins/all.nix
 
           nixvim.nixosModules.nixvim
           catppuccin.nixosModules.catppuccin
@@ -44,8 +47,39 @@
             home-manager.sharedModules = [
               nixvim.homeManagerModules.nixvim
               textfox.homeManagerModules.default  
-              ];
+            ];
             home-manager.users.viku = import ./home.nix;
+          }
+        ];
+      };
+
+      digivice = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";  # ARM64 for RK3588 chip
+        modules = [
+          ./configuration.nix  # You may want to create a separate ./digivice-configuration.nix for ARM-specific settings
+          ./modules/nixvim/nixvim.nix
+          ./modules/nixvim/plugins/all.nix
+
+          nixvim.nixosModules.nixvim
+          catppuccin.nixosModules.catppuccin
+          home-manager.nixosModules.home-manager
+
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";  
+            home-manager.sharedModules = [
+              nixvim.homeManagerModules.nixvim
+              textfox.homeManagerModules.default  
+            ];
+            home-manager.users.viku = import ./home.nix;
+          }
+
+          {
+            # Hardware-specific settings for MNT Pocket Reform
+            boot.kernelPackages = pkgs.linuxPackages_latest;
+            hardware.opengl.enable = true;
+            powerManagement.enable = true;
           }
         ];
       };
@@ -62,40 +96,7 @@
     };
 
     devShell = forAllSystems (system: nixpkgs.legacyPackages.${system}.mkShell {
-      packages = with nixpkgs.legacyPackages.${system}; [
-        node2nix
-        nodejs
-        pnpm
-        yarn
-        pkgs.nodePackages.prettier
-        git
-        typos
-        ruby
-        gcc
-        python3
-        python3Packages.pip
-        python3Packages.virtualenv
-        python3Packages.wheel
-        python3Packages.setuptools 
-        postgresql
-        postgresql_13
-        libxslt
-        libzip
-        openldap
-        cyrus_sasl
-        libxml2
-        libjpeg
-        wget
-        wkhtmltopdf
-        (pkgs.sassc.override { libsass = pkgs.libsass; })
-        libev     
-        zlib
-        python312Packages.pip
-        python312Packages.virtualenv
-        python312Packages.cython
-        python312Packages.psycopg2  # ✅ Prebuilt version
-        python312Packages.python-ldap 
-      ];
-    });
+        packages = devPackages nixpkgs.legacyPackages.${system};    
+      });
   };
 }
