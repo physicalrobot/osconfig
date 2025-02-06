@@ -38,7 +38,7 @@
       tars = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./hosts/desktop/configuration.nix
           ./modules/nixvim/nixvim.nix
           ./modules/nixvim/plugins/all.nix
 
@@ -62,7 +62,7 @@
       digivice = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";  # ARM64 for RK3588 chip
         modules = [
-          ./configuration.nix  # You may want to create a separate ./digivice-configuration.nix for ARM-specific settings
+          ./hosts/pocket-reform/configuration.nix
           ./modules/nixvim/nixvim.nix
           ./modules/nixvim/plugins/all.nix
 
