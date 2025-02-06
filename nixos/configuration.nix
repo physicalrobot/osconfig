@@ -1,11 +1,15 @@
-{inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
-    ./system/hypr.nix  # Hyprland settings in a separate file for modularity
-    # Add more modular configurations
 
+    # Modular system configurations
+    ./system/hypr.nix        # Hyprland settings
+    ./system/audio.nix       # PipeWire and audio settings
+    ./system/filesystems.nix # Filesystem mount configurations
+    ./system/gaming.nix      # Gaming-related settings
+    ./system/nvidia.nix      # NVIDIA-specific settings (only applies if needed)
   ];
 
   # Bootloader configuration
@@ -45,7 +49,6 @@
   # Enable X11 windowing system
   services.xserver = {
     enable = true;
-    videoDrivers = [ "nvidia" ];
     displayManager.gdm = {
       enable = true;
       wayland = true;
@@ -57,37 +60,19 @@
     libinput.enable = true;
   };
 
-  #automount Gringotts
-  fileSystems."/mnt/mydrive" = {
-  device = "/dev/sda2";
-  fsType = "ntfs";
-  options = [ "rw" "uid=1000" "gid=1000" "umask=0022" ];
-};
-  
   # Jellyfin Media Server
   services.jellyfin = {
     enable = true;
     openFirewall = true;
   };
 
-  # Printing and Bluetooth
+  # Printing and Bluetooth (kept general)
   services.printing.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
   services.blueman.enable = true;
-
-
-  # Sound with PipeWire
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # User configuration
   users.users.viku = {
@@ -103,24 +88,7 @@
   };
 
   services.flatpak.enable = true;
- 
-  
-  hardware = {
-     graphics.enable = true;
-     nvidia.modesetting.enable = true;
-     nvidia.open = true;
-  };
-
-  
   programs.firefox.enable = true;
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-  };
-
 
   # System packages
   environment.systemPackages = import ./system-packages.nix { pkgs = pkgs; };
@@ -129,13 +97,13 @@
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.qt5 = {
-  enable = true;
-  platformTheme = "qt5ct"; 
-     style = {
+    enable = true;
+    platformTheme = "qt5ct"; 
+    style = {
       package = pkgs.utterly-nord-plasma;
       name = "Utterly Nord Plasma";
     }; 
-    };  
+  };  
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
     "steam"
