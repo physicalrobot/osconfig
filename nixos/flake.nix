@@ -25,7 +25,7 @@
     }; 
 
     # Import dev-packages and apply them per system
-    devPackagesFor = system: import ./dev-packages.nix { pkgs = pkgsFor system; };
+    devPackagesFor = system: import ./system/packages/dev-packages.nix { pkgs = pkgsFor system; };
 
     # Function to import packages with overlays applied
     importPkgs = path: attrs: import path (attrs // {

@@ -5,8 +5,8 @@
     ./hardware-configuration.nix
 
     # Modular system configurations
-    ./system/hypr.nix        # Hyprland settings
-    ./system/audio.nix       # PipeWire and audio settings
+    ../../system/hypr.nix        # Hyprland settings
+    ../../system/audio.nix       # PipeWire and audio settings
     # ./system/filesystems.nix # Filesystem mount configurations
     # ./system/gaming.nix      # Gaming-related settings
     # ./system/nvidia.nix      # NVIDIA-specific settings (only applies if needed)

@@ -5,11 +5,11 @@
     ./hardware-configuration.nix
 
     # Modular system configurations
-    ./system/hypr.nix        # Hyprland settings
-    ./system/audio.nix       # PipeWire and audio settings
-    ./system/filesystems.nix # Filesystem mount configurations
-    ./system/gaming.nix      # Gaming-related settings
-    ./system/nvidia.nix      # NVIDIA-specific settings (only applies if needed)
+    ../../system/hypr.nix        # Hyprland settings
+    ../../system/audio.nix       # PipeWire and audio settings
+    ../../system/filesystems.nix # Filesystem mount configurations
+    ../../system/gaming.nix      # Gaming-related settings
+    ../../system/nvidia.nix      # NVIDIA-specific settings (only applies if needed)
   ];
 
   # Bootloader configuration
@@ -91,7 +91,7 @@
   programs.firefox.enable = true;
 
   # System packages
-  environment.systemPackages = import ./system-packages.nix { pkgs = pkgs; };
+  environment.systemPackages = import ../../system/packages/system-packages.nix { pkgs = pkgs; };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
