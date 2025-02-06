@@ -61,5 +61,7 @@
   graphviz
   vimwiki-markdown
   emacs30-pgtk
+  gimp
+  inkscape
 ]
 
