@@ -17,6 +17,6 @@
     ./todo-comments.nix
     ./transparent.nix
     ./treesitter.nix
-    ./obsidian.nix
+    #./obsidian.nix
   ];
 }
