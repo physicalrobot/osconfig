@@ -144,7 +144,7 @@
     starship
     hyprpaper
     #neovim
-    emacs
+    #emacs
     gcc
     clang
     cmake
@@ -189,6 +189,7 @@
     pandoc
     graphviz
     vimwiki-markdown
+    emacs30-pgtk
 ];
 
   environment.sessionVariables = {
