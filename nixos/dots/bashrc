@@ -12,7 +12,7 @@ export PATH="$HOME/.gem/bin:$PATH"
 
 
  alias nixos-rebuild-tars='sudo nixos-rebuild switch --flake ~/.dotfiles/nixos/ #tars'
- alias devshell="nix develop ~/.dotfiles/nixos"
+ alias devshell="nix develop ~/.dotfiles/nixos#"
  
  alias mount_gdrive='rclone mount --daemon gdrive:Obsidian /home/viku/Documents/gdrive'
 
