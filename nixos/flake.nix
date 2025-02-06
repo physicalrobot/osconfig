@@ -17,9 +17,15 @@
     
     # Generate attributes for multiple systems
       forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+   
+    # Function to get pkgs for a given system 
+    pkgsFor = system: import nixpkgs {
+      system = system;
+      config.allowUnfree = true;
+    }; 
 
-    # Import dev packages from an external file
-      devPackages = import ./dev-packages.nix;
+    # Import dev-packages and apply them per system
+    devPackagesFor = system: import ./dev-packages.nix { pkgs = pkgsFor system; };
 
     # Function to import packages with overlays applied
     importPkgs = path: attrs: import path (attrs // {
@@ -95,8 +101,10 @@
       ];
     };
 
-    devShell = forAllSystems (system: nixpkgs.legacyPackages.${system}.mkShell {
-        packages = devPackages nixpkgs.legacyPackages.${system};    
-      });
+  devShells = forAllSystems (system: {
+      devShell = (pkgsFor system).mkShell {
+        packages = devPackagesFor system;
+      };
+    }); 
   };
 }

@@ -1,5 +1,6 @@
 # dev-packages.nix
-{ pkgs }: with pkgs; [
+{ pkgs }: 
+with pkgs; [
   node2nix
   nodejs
   pnpm
