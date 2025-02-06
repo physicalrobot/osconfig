@@ -53,6 +53,9 @@
 
 (add-to-list 'safe-local-variable-values '(org-roam-directory . "."))
 
+(setq fancy-splash-image "~/Pictures/vikalpa411.xpm") 
+
+
 
 (set-frame-parameter (selected-frame) 'alpha-background 85)
 (add-to-list 'default-frame-alist '(alpha-background . 85))
