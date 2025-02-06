@@ -54,8 +54,16 @@
 (add-to-list 'safe-local-variable-values '(org-roam-directory . "."))
 
 
-(set-frame-parameter nil 'alpha-background 75) ; For current frame
-(add-to-list 'default-frame-alist '(alpha-background . 75)) ; For all new frames henceforth
+(defun qleguennec/set-frame-transparency (&optional frame)
+  (interactive)
+  (let ((frame (or frame (selected-frame))))
+    (set-frame-parameter frame 'alpha-background 80)))
+
+(dolist (frame (visible-frame-list))
+  (qleguennec/set-frame-transparency frame))
+
+(add-to-list 'after-make-frame-functions
+             #'qleguennec/set-frame-transparency)
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
