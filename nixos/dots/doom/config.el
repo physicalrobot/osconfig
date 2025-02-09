@@ -57,8 +57,8 @@
 
 
 
-(set-frame-parameter (selected-frame) 'alpha-background 85)
-(add-to-list 'default-frame-alist '(alpha-background . 85))
+(set-frame-parameter (selected-frame) 'alpha-background 90)
+(add-to-list 'default-frame-alist '(alpha-background . 90))
 
 ;; Ensure it's applied to newly created frames
 (add-hook 'after-make-frame-functions #'qleguennec/set-frame-transparency)
