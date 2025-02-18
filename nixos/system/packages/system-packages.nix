@@ -63,5 +63,6 @@
   emacs30-pgtk
   gimp
   inkscape
+  superfile 
 ]
 
