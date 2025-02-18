@@ -22,6 +22,7 @@ in
       ".bashrc".source = pkgs.writeText "bashrc" (builtins.readFile ./dots/bashrc);
       ".config/ghostty".source = ./dots/ghostty;
       ".config/doom".source = ./dots/doom; 
+      ".config/superfile".source = ./dots/superfile;
     };
 
 

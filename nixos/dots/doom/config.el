@@ -49,6 +49,27 @@
   :config
   (org-roam-db-autosync-mode))
 
+
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+(setq org-roam-node-display-template
+      (concat "${title:*} "
+              (propertize "${tags:10}" 'face 'org-tag)))
+
+
 (add-hook 'hack-local-variables-hook (lambda () (when (boundp 'org-roam-directory) (org-roam-db-sync))))
 
 (add-to-list 'safe-local-variable-values '(org-roam-directory . "."))
@@ -59,6 +80,7 @@
 
 (set-frame-parameter (selected-frame) 'alpha-background 90)
 (add-to-list 'default-frame-alist '(alpha-background . 90))
+
 
 ;; Ensure it's applied to newly created frames
 (add-hook 'after-make-frame-functions #'qleguennec/set-frame-transparency)

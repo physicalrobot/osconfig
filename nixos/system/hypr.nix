@@ -33,7 +33,7 @@
     nordzy-icon-theme
     epapirus-icon-theme
     morewaita-icon-theme
-    la-capitaine-icon-theme
+    # la-capitaine-icon-theme
     gnome-icon-theme
 
     # Hyprland utilities
