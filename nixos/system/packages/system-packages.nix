@@ -1,6 +1,6 @@
 # system-packages.nix
 { pkgs }: with pkgs; [
-  dolphin
+  kdePackages.dolphin
   hyprland
   waybar
   wl-clipboard
