@@ -45,34 +45,48 @@
 (use-package! org-roam
   :after org
   :init
-  (setq org-roam-directory "~/org-roam")
+  (setq org-roam-directory "~/org-roam") ;; Default directory
   :config
   (org-roam-db-autosync-mode))
 
-
 (use-package! websocket
-    :after org-roam)
+  :after org-roam)
 
 (use-package! org-roam-ui
-    :after org-roam ;; or :after org
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+  :after org-roam
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
 
 (setq org-roam-node-display-template
       (concat "${title:*} "
               (propertize "${tags:10}" 'face 'org-tag)))
 
-
-(add-hook 'hack-local-variables-hook (lambda () (when (boundp 'org-roam-directory) (org-roam-db-sync))))
+(add-hook 'hack-local-variables-hook
+          (lambda () (when (boundp 'org-roam-directory) (org-roam-db-sync))))
 
 (add-to-list 'safe-local-variable-values '(org-roam-directory . "."))
+
+;; ================================
+;; 🚀 Auto-Switch Org-roam Directory
+;; ================================
+(defun my/org-roam-set-directory ()
+  "Automatically switch `org-roam-directory` based on the current directory."
+  (let ((cwd (expand-file-name default-directory)))
+    (cond
+     ((string-match-p (expand-file-name "~/Documents/GamesOfTheOldGods/") cwd)
+      (setq org-roam-directory "~/Documents/GamesOfTheOldGods/"))
+     ((string-match-p (expand-file-name "~/Documents/TheGodMachine/") cwd)
+      (setq org-roam-directory "~/Documents/TheGodMachine/"))
+     (t
+      (setq org-roam-directory "~/org-roam/"))) ;; Default fallback
+
+    ;; Ensure the database syncs after switching directories
+    (org-roam-db-sync)))
+
+(add-hook 'find-file-hook #'my/org-roam-set-directory)
 
 (setq fancy-splash-image "~/Pictures/vikalpa411.xpm") 
 
