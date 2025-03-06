@@ -32,6 +32,7 @@
   qbittorrent
   brave
   librewolf
+  kdePackages.qtstyleplugin-kvantum
   libsForQt5.qtstyleplugin-kvantum
   libsForQt5.qt5ct
   flatpak 
