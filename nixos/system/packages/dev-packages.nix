@@ -33,7 +33,6 @@ with pkgs; [
   python312Packages.cython
   python312Packages.psycopg2
   python312Packages.python-ldap
-  zulu8
-  zulu23
+  openjdk17
 ]
 

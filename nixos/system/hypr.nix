@@ -31,7 +31,7 @@
     # Icon themes
     dracula-icon-theme
     nordzy-icon-theme
-    epapirus-icon-theme
+    #epapirus-icon-theme
     morewaita-icon-theme
     # la-capitaine-icon-theme
     gnome-icon-theme
