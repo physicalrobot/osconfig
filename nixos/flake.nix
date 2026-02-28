@@ -11,7 +11,7 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, catppuccin, textfox, ... }: 
+  outputs = { self, nixpkgs, home-manager, nixvim, catppuccin, textfox, nur, ... }: 
   let
     inherit (nixpkgs) lib;
     
@@ -22,7 +22,8 @@
     pkgsFor = system: import nixpkgs {
       system = system;
       config.allowUnfree = true;
-    }; 
+      overlays = [ nur.overlays.default ];
+    };
 
     # Import dev-packages and apply them per system
     devPackagesFor = system: import ./system/packages/dev-packages.nix { pkgs = pkgsFor system; };
@@ -37,10 +38,12 @@
     nixosConfigurations = {
       tars = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [
+          modules = [
+          {
+            nixpkgs.overlays = [ nur.overlays.default ];
+            nixpkgs.config.allowUnfree = true;
+          }
           ./hosts/desktop/configuration.nix
-          ./modules/nixvim/nixvim.nix
-          ./modules/nixvim/plugins/all.nix
 
           nixvim.nixosModules.nixvim
           catppuccin.nixosModules.catppuccin
@@ -63,8 +66,6 @@
         system = "aarch64-linux";  # ARM64 for RK3588 chip
         modules = [
           ./hosts/pocket-reform/configuration.nix
-          ./modules/nixvim/nixvim.nix
-          ./modules/nixvim/plugins/all.nix
 
           nixvim.nixosModules.nixvim
           catppuccin.nixosModules.catppuccin
@@ -92,7 +93,12 @@
     };
 
     homeConfigurations.viku = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            overlays = [ nur.overlays.default ];
+            config.allowUnfree = true;  
+      };
+      
       extraSpecialArgs = { inherit nixpkgs; };
       modules = [
         nixvim.homeManagerModules.nixvim

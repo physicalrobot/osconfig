@@ -40,7 +40,7 @@
     waybar                 # Status bar
     swaynotificationcenter # Notifications
     hyprpaper              # Wallpaper
-    rofi-wayland           # Application launcher
+    rofi                   # Application launcher
     grim                   # Screenshots
     slurp                  # Screenshot region selector
     hyprshot               # Hyprland-specific screenshots
